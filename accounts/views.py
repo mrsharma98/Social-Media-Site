@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+# reverse_lazy - takes care of where a user should be redirected after loggedIn or loggedOut or SignedIn
+
 from django.views.generic import CreateView
 
 from . import forms
