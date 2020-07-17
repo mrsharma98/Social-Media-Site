@@ -7,7 +7,8 @@
     {% if user.is_authenticated %}
       <h2>Welcome Back!
         <a href="{% url 'posts:for_user' username=user.username %}">
-          <!-- url will take the user where they can see all their
+          <!-- it will take them to their profile.
+          url will take the user where they can see all their
                posts and with this we have to provide their username -->
           @{{ user.username }}
         </a>
@@ -28,6 +29,8 @@
 </div>
 
 {% endblock %}
+
+<!-- Content -->
 
 {% block group_content %}
 

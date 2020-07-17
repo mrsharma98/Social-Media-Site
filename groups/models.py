@@ -8,15 +8,17 @@ from django.utils.text import slugify
 # Groups models.py file
 # Create your models here.
 import misaka
-#A Django template tag for rendering Markdown
+#A Django template tag for rendering link or Markdown
 from django.contrib.auth import get_user_model
 # this returns user model tht is currently active in this project
+
 User = get_user_model()
 # creating a object of it.
 # it allows to call things off of the current user's session.
 
 from django import template
 register = template.Library()
+# this is how we use custom template tags
 
 
 class Group(models.Model):
@@ -24,15 +26,16 @@ class Group(models.Model):
     slug = models.SlugField(allow_unicode=True, unique=True)
     description = models.TextField(blank=True, default='')
     description_html = models.TextField(editable=False, default='', blank=True)
-    members = models.ManyToManyField(User, through='GroupMember')\
+    members = models.ManyToManyField(User, through='GroupMember')
 
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(self.name) # editing the name to form a slug
         self.description_html = misaka.html(self.description)
+        #
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

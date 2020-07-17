@@ -1,15 +1,16 @@
 from django.db import models
-from django.urls import reverse
+from django.core.urlresolvers import reverse
+# for sending back to somewhere after they have posted something
+
 from django.conf import settings
 
 import misaka
-
 from groups.models import Group
 
 # Posts models.py
 # Create your models here.
 
-from D]django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Post(models.Model):
@@ -36,4 +37,4 @@ class Post(models.Model):
     class Meta:
         ordering = ['-created_at']
         unique_together = ['user', 'message']
-        # in this way every message is uniquely link to a user. 
+        # in this way every message is uniquely link to a user.

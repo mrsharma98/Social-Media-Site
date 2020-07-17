@@ -13,14 +13,21 @@
   {% if user in group.members.all %}
   <!-- group.member.all -> is an array of list of
         group member in that particular group -->
+
+  <!-- leave option - If the user in group -->
     <a href="{% url 'groups:leave' slug=group.slug %}"
-      class="btn btn-lg btn-fill btn-warning" ><span
-      class="glyphicon glyphicon-remove-circle"></span>Leave</a>
+      class="btn btn-lg btn-fill btn-warning" >
+      <span class="glyphicon glyphicon-remove-circle"></span>
+      Leave
+    </a>
 
   {% else %}
+  <!-- join option -->
     <a href="{% url 'groups:join' slug=group.slug %}"
-      class="btn btn-lg btn-fill btn-warning" ><span
-      class="glyphicon glyphicon-ok-circle"></span>Join</a>
+      class="btn btn-lg btn-fill btn-warning" >
+      <span class="glyphicon glyphicon-ok-circle"></span>
+      Join
+    </a>
 
   {% endif %}
 </div>
@@ -30,6 +37,8 @@
 {% block group_content %}
 
 <div class="col-md-8">
+
+  <!-- checking if post in group -->
   {% if group.posts.counts == 0 %}
     <h2>No post in this group yet!</h2>
 
@@ -40,6 +49,7 @@
            in the middle of a html file.
            the '_' used beofore that if just for the significance
            that this file is injected somewhere.
+           Technically we don't need '_' .
        -->
     {% endfor %}
   {% endif %}
