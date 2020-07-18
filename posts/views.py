@@ -3,7 +3,7 @@
 from django.shortcuts import render
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from djang.urls import reverse_lazy
+from djang.core.urlresolvers import reverse_lazy
 
 from django.http import Http404
 from django.views import generic
@@ -42,7 +42,7 @@ class UserPosts(generic.Listview):
         except User.DoesNotExist:
             raise Http404
         else:
-            return self.post_user.post.all()
+            return self.post_user.posts.all()
 
         # basically when we call the queryset for the user's post
         # that the user actually exist then we will be able to
@@ -89,5 +89,5 @@ class DeletePost(LoginRequiredMixin, SelectRelatedMixin, DeleteView):
         return queryset.filter(user_id = self.request.user.id)
 
     def delete(self, *args, **kwargs):
-        message.success(self.request,'Post Deleted')
+        messages.success(self.request,'Post Deleted')
         return super().delete(*args, **kwargs)
